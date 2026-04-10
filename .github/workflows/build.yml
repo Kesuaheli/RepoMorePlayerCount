@@ -1,0 +1,42 @@
+name: Build Mod
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    env:
+      PROJECT_NAME: MorePlayerCount
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Build Mod
+      run: dotnet build
+    
+    - name: Construct artifact directory
+      run: |
+        mkdir out\BepInEx\plugins
+        move README.md out
+        move LICENSE out
+        move icon.png out
+        move manifest.json out
+        move bin\Debug\${{ env.PROJECT_NAME }}.dll out\BepInEx\plugins
+        
+        ls -R -File -Name -Path out
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.PROJECT_NAME }}
+        path: out
