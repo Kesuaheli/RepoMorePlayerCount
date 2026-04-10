@@ -8,7 +8,7 @@ public class MorePlayerCount : BaseUnityPlugin
 {
     const string modGUID = "de.kesuaheli.moreplayercount";
     const string modName = "MorePlayerCount";
-    const string modVersion = "0.0.1";
+    const string modVersion = "1.0.1";
     private void Awake()
     {
         var harmony = new Harmony(modGUID);
