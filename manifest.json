@@ -1,0 +1,7 @@
+{
+	"name": "RepoMorePlayerCount",
+	"description": "Increase the maximum amount of 'Map Player Count' upgrades to allow up to half of the players in your lobby to have one.",
+	"version_number": "1.0.0",
+	"dependencies": [],
+	"website_url": "https://github.com/Kesuaheli/RepoMorePlayerCount"
+}
