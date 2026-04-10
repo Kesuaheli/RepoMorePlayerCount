@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using Photon.Pun;
 using UnityEngine.SceneManagement;
 
 [BepInPlugin(modGUID, modName, modVersion)]
@@ -22,6 +23,9 @@ public class MorePlayerCount : BaseUnityPlugin
     {
         if (!SemiFunc.RunIsShop()) return;
 
-        StatsManager.instance.itemDictionary.GetValueSafe("Item Upgrade Map Player Count").maxAmount = 3;
+        int playerCount = SemiFunc.IsMultiplayer() ? PhotonNetwork.CurrentRoom.PlayerCount : 1;
+        int mapPlayerCountUpgradeCount = playerCount / 2;
+        StatsManager.instance.itemDictionary.GetValueSafe("Item Upgrade Map Player Count").maxAmount = mapPlayerCountUpgradeCount;
+        StatsManager.instance.itemDictionary.GetValueSafe("Item Upgrade Map Player Count").maxPurchaseAmount = mapPlayerCountUpgradeCount;
     }
 }
